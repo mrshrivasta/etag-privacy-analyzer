@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Settings — ETag Privacy Analyzer{% endblock %}
+{% block content %}
+<h1>Settings</h1>
+<div class="card">
+  <p>This project always takes a target URL at scan time from the Dashboard, so no default-path settings are needed here.</p>
+  <form method="POST">
+    <label>Minimum severity for alerts</label>
+    <select name="alert_on_severity">
+      {% for sev in ["low", "medium", "high", "critical"] %}
+      <option value="{{ sev }}" {% if settings.alert_on_severity == sev %}selected{% endif %}>{{ sev }}</option>
+      {% endfor %}
+    </select>
+    <label><input type="checkbox" name="email_notifications" style="width:auto" {% if settings.email_notifications %}checked{% endif %}> Email notifications (not yet wired to an SMTP provider)</label>
+    <button type="submit">Save Settings</button>
+  </form>
+</div>
+{% endblock %}
